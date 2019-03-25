@@ -52,6 +52,14 @@ Player::Player(glm::vec3 position, glm::vec3 playerHeight, float zAngle, float y
 }
 
 
+void Player::SetMaxBounds(float minX, float maxX, float minZ, float maxZ)
+{
+	this->maxX = minX;
+	this->maxX = maxX;
+	this->maxZ = minZ;
+	this->maxZ = maxZ;
+}
+
 /// <summary>
 /// Returns the point the player is looking at
 /// </summary>
@@ -96,6 +104,17 @@ void Player::Move(MovementDirections direction, float deltaTime)
 		break;
 	}
 
+
+	// Restrict player in fields
+	if (this->position.x > maxX)
+		this->position.x = maxX;
+	if (this->position.z > maxZ)
+		this->position.z = maxZ;
+	if (this->position.z < minX)
+		this->position.z = minX;
+	if (this->position.z < minZ)
+		this->position.z = minZ;
+
 	// Locks the player at ground level
 	this->position.y = 0.0f;
 }
@@ -138,7 +157,7 @@ void Player::ToggleEagleEye()
 
 		this->z_angle = 60;
 		this->y_angle = -25;
-		this->position = glm::vec3(-5, 10, -5);
+		this->position = glm::vec3(-20, 15, 10);
 	}
 	else
 	{

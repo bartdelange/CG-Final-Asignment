@@ -25,6 +25,11 @@ private:
 	float old_z_angle;
 	float old_y_angle;
 	bool eagle_eye_enabled = false;
+
+	float maxX = 100;
+	float maxZ = 100;
+	float minX = 0;
+	float minZ = 0;
 	
 	void ResetEagleEye();
 	void CalculateVectors();
@@ -44,9 +49,9 @@ public:
 	float movement_speed;
 	float mouse_speed;
 
+	void SetMaxBounds(float minX, float maxX, float minZ, float maxZ);
 	glm::mat4 LookingAt();
 	void Move(MovementDirections direction, float deltaTime);
 	void Look(float xoffset, float yoffset);
-	void Zoom(float yoffset);
 	void ToggleEagleEye();
 };

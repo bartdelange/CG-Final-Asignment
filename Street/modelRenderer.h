@@ -19,7 +19,7 @@ private:
 	Mesh mesh;
 
 	// Transformation
-	bool should_transform;
+	bool should_transform = false;
 	transFunc tranformFunc;
 
 	// Shader related
