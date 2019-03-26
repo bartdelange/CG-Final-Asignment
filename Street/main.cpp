@@ -171,6 +171,7 @@ void CreateHouses()
 
 	// Init house 1
 	model = glm::translate(iden, glm::vec3(0, -0.9, 0));
+	model = glm::rotate(model, glm::radians(-180.0f), glm::vec3(0, 1, 0));
 	ModelRenderer &house1 = ModelRenderer("House1", model, projection, view * model, lightSource);
 	house1.ParseObject("Objects/house1.obj");
 	house1.SetMaterial(Material{
@@ -205,7 +206,7 @@ void CreateHouses()
 	{
 		float spacing = 12.5f;
 
-		house1.model = glm::translate(house1.model, glm::vec3(0, 0, spacing));
+		house1.model = glm::translate(house1.model, glm::vec3(0, 0, -spacing));
 		house2.model = glm::translate(house2.model, glm::vec3(spacing * 2, 0, 0));
 		
 		models.push_back(house1);
@@ -232,7 +233,7 @@ void CreateRoad()
 		glm::vec3(1.0, 1.0, 1.0),
 		128
 	});
-	brick.SetTexture("Textures/yellowbrick.bmp");
+	brick.SetTexture("Textures/grass.bmp");
 	brick.Initialize();
 	models.push_back(brick);
 	for (int i = 0; i < 24; i++)
@@ -280,7 +281,7 @@ void CreateRoad()
 		glm::vec3(1.0, 1.0, 1.0),
 		128
 		});
-	brick2.SetTexture("Textures/yellowbrick.bmp");
+	brick2.SetTexture("Textures/grass.bmp");
 	brick2.Initialize();
 	models.push_back(brick2);
 	for (int i = 0; i < 24; i++)
@@ -344,7 +345,7 @@ glm::mat4 CreatePaperMatrix()
 /// <summary>
 /// Flying animation for the paper plane
 /// </summary>
-/// <param name="model"></param>
+/// <param name="model">The target of the animation (this is parsed by reference)</param>
 bool is_positive_rotating = false;
 bool passed_treshhold = true;
 float rotation_speed = 0.5f;
